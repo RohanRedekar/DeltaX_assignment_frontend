@@ -11,6 +11,7 @@ import {
 import { SearchIcon, AddIcon } from "@chakra-ui/icons";
 import SongsDisplayTable from "../SongsTable";
 import ArtistsDisplayTable from "../ArtistsTable";
+import { Link as RouterLink } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -29,12 +30,14 @@ const HomePage = () => {
           />
           <Input size='sm' type='tel' variant='outline' placeholder='Search' />
         </InputGroup>
-        <Button leftIcon={<AddIcon />} colorScheme='gray' variant='solid'>
-          Add Song
-        </Button>
+        <RouterLink to={"/addsong"}>
+          <Button leftIcon={<AddIcon />} colorScheme='gray' variant='solid'>
+            Add Song
+          </Button>
+        </RouterLink>
       </Flex>
       <SongsDisplayTable />
-      <ArtistsDisplayTable/>
+      <ArtistsDisplayTable />
     </Box>
   );
 };

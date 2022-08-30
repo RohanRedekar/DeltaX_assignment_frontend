@@ -9,9 +9,8 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ReactStars from "react-rating-stars-component";
 import "./SongsTable.css"

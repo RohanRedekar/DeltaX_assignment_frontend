@@ -8,9 +8,8 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 
 const ArtistsDisplayTable = () => {
   const [artists, setArtists] = useState([]);
@@ -20,7 +19,7 @@ const ArtistsDisplayTable = () => {
       url: "http://localhost:6001/artists",
     }).then((res) => setArtists(res.data));
   }, []);
-  
+
   return (
     <Box margin={"3rem auto"} width='90%'>
       <TableContainer>
