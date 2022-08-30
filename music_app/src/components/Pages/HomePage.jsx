@@ -9,7 +9,8 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { SearchIcon, AddIcon } from "@chakra-ui/icons";
-import DisplayTable from "../table";
+import SongsDisplayTable from "../SongsTable";
+import ArtistsDisplayTable from "../ArtistsTable";
 
 const HomePage = () => {
   return (
@@ -32,7 +33,8 @@ const HomePage = () => {
           Add Song
         </Button>
       </Flex>
-      <DisplayTable />
+      <SongsDisplayTable />
+      <ArtistsDisplayTable/>
     </Box>
   );
 };

@@ -14,17 +14,17 @@ import axios from "axios";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ReactStars from "react-rating-stars-component";
-import "./table.css"
+import "./SongsTable.css"
 
-const DisplayTable = () => {
+const SongsDisplayTable = () => {
   const theads = ["Artwork", "Song", "Date of Release", "Artists", "Rate"];
-  let [topSongs, setTopSongs] = useState([]);
+  let [songs, setSongs] = useState([]);
 
   useEffect(() => {
     axios({
       method: "GET",
       url: "http://localhost:6001/songs",
-    }).then((res) => setTopSongs(res.data));
+    }).then((res) => setSongs(res.data));
   }, []);
 
   const ratingChanged = (newRating) => {
@@ -45,9 +45,9 @@ const DisplayTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {topSongs?.map((song) => (
+            {songs?.map((song) => (
               <Tr key={uuidv4()}>
-                <Td textAlign='center'><Image src={song.cover}/></Td>
+                {/* <Td textAlign='center'><Image src={song.cover}/></Td> */}
                 <Td textAlign='center'>{song.name}</Td>
                 <Td textAlign='center'>{song.dateOfRelease}</Td>
                 <Td textAlign='center'>
@@ -74,4 +74,4 @@ const DisplayTable = () => {
   );
 };
 
-export default DisplayTable;
+export default SongsDisplayTable;
