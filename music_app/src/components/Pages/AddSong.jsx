@@ -1,5 +1,6 @@
 import {
   Box,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
@@ -9,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Select from "react-select";
+import AddArtist from "../AddArtist";
 
 const AddSong = () => {
   const [artists, setArtists] = useState([]);
@@ -52,6 +54,11 @@ const AddSong = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { name, dateOfRelease, artistId, cover } = data;
+    if (!name || !dateOfRelease || !artistId || !cover) {
+      alert("All fields are required");
+      return;
+    }
     const formData = new FormData();
     for (const key in data) {
       formData.append(key, data[key]);
@@ -72,9 +79,9 @@ const AddSong = () => {
   return (
     <Box width='90%' m={"auto"}>
       <Heading>Adding a new song</Heading>
-      <Stack mt={5} spacing={18}>
+      <Stack mt={5}>
         <form onSubmit={handleSubmit}>
-          <FormControl width='400px' id='name'>
+          <FormControl mb={5} width='400px' id='name'>
             <FormLabel>Song Name</FormLabel>
             <Input
               outline={"1px solid rgb(204, 204, 204)"}
@@ -83,7 +90,7 @@ const AddSong = () => {
               onChange={handleChange}
             />
           </FormControl>
-          <FormControl width='400px' id='dateOfRelease'>
+          <FormControl mb={5} width='400px' id='dateOfRelease'>
             <FormLabel>Date Released</FormLabel>
             <Input
               outline={"1px solid rgb(204, 204, 204)"}
@@ -92,18 +99,21 @@ const AddSong = () => {
               onChange={handleChange}
             />
           </FormControl>
-          <FormControl id='cover'>
+          <FormControl mb={5} id='cover'>
             <FormLabel>Artwork</FormLabel>
             <input type='file' onChange={fileChange} />
           </FormControl>
-          <FormControl width='400px' id='artistId'>
-            <FormLabel>Artists</FormLabel>
-            <Select
-              isMulti
-              options={artists}
-              onChange={(opt) => handleselect(opt)}
-            />
-          </FormControl>
+          <Flex>
+            <FormControl mb={5} width='400px' id='artistId'>
+              <FormLabel>Artists</FormLabel>
+              <Select
+                isMulti
+                options={artists}
+                onChange={(opt) => handleselect(opt)}
+              />
+            </FormControl>
+            <AddArtist />
+          </Flex>
           <Input
             outline={"1px solid rgb(204, 204, 204)"}
             type='submit'
