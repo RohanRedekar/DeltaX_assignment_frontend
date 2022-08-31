@@ -11,13 +11,14 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 import ReactStars from "react-rating-stars-component";
-import "./SongsTable.css"
+import "./SongsTable.css";
 
 const SongsDisplayTable = () => {
   const theads = ["Artwork", "Song", "Date of Release", "Artists", "Rate"];
   let [songs, setSongs] = useState([]);
+  let [id, setId] = useState("");
+  let [rating, setRating] = useState(0);
 
   useEffect(() => {
     axios({
@@ -27,7 +28,7 @@ const SongsDisplayTable = () => {
   }, []);
 
   const ratingChanged = (newRating) => {
-    console.log(newRating);
+    setRating(newRating);
   };
 
   return (
@@ -45,8 +46,10 @@ const SongsDisplayTable = () => {
           </Thead>
           <Tbody>
             {songs?.map((song) => (
-              <Tr key={uuidv4()}>
-                {/* <Td textAlign='center'><Image src={song.cover}/></Td> */}
+              <Tr key={song._id}>
+                <Td textAlign='center'>
+                  <Image src={song.cover} />
+                </Td>
                 <Td textAlign='center'>{song.name}</Td>
                 <Td textAlign='center'>{song.dateOfRelease}</Td>
                 <Td textAlign='center'>
@@ -56,7 +59,7 @@ const SongsDisplayTable = () => {
                       : `${artist.name}, `
                   )}
                 </Td>
-                <Td textAlign='center'>
+                <Td textAlign='center' onClick={() => setId(song._id)}>
                   <ReactStars
                     count={5}
                     onChange={ratingChanged}
