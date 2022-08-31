@@ -12,12 +12,11 @@ import Select from "react-select";
 
 const AddSong = () => {
   const [artists, setArtists] = useState([]);
-  const formData = new FormData();
   const [data, setData] = useState({
     name: "",
     dateOfRelease: "",
-    formData,
     artistId: [],
+    cover: null,
   });
 
   useEffect(() => {
@@ -43,9 +42,7 @@ const AddSong = () => {
   };
 
   const fileChange = (e) => {
-    if (e.target && e.target.files[0]) {
-      formData.append("file", e.target.files[0]);
-    }
+    setData({ ...data, cover: e.target.files[0] });
   };
 
   const handleChange = (e) => {
@@ -55,18 +52,28 @@ const AddSong = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+    // for (const pair of formData.entries()) {
+    //   console.log(`${pair[0]}, ${pair[1]}`);
+    // }
     axios({
       method: "POST",
       url: "http://localhost:6001/songs/addsong",
-      data: data,
-    }).then((res) => console.log(res));
+      // url: "https://httpbin.org/anything",
+      data: formData,
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log("error:", err));
   };
 
   return (
     <Box width='90%' m={"auto"}>
       <Heading>Adding a new song</Heading>
       <Stack mt={5} spacing={18}>
-        <form encType='multipart/form-data' onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <FormControl width='400px' id='name'>
             <FormLabel>Song Name</FormLabel>
             <Input
