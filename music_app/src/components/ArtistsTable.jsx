@@ -32,8 +32,8 @@ const ArtistsDisplayTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {artists?.map(({ name, dob, songs }) => (
-              <Tr>
+            {artists?.map(({ _id, name, dob, songs }) => (
+              <Tr key={_id}>
                 <Td textAlign='center'>{name}</Td>
                 <Td textAlign='center'>{dob}</Td>
                 <Td textAlign='center'>
