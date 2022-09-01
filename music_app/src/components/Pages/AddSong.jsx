@@ -77,7 +77,7 @@ const AddSong = () => {
   };
 
   return (
-    <Box width='90%' m={"auto"}>
+    <Box width='90%' m={"3rem auto"}>
       <Heading>Adding a new song</Heading>
       <Stack mt={5}>
         <form onSubmit={handleSubmit}>
@@ -97,6 +97,7 @@ const AddSong = () => {
               name='dateOfRelease'
               type='text'
               onChange={handleChange}
+              placeholder="November 12, 2014"
             />
           </FormControl>
           <FormControl mb={5} id='cover'>

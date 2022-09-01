@@ -48,7 +48,12 @@ const SongsDisplayTable = () => {
             {songs?.map((song) => (
               <Tr key={song._id}>
                 <Td textAlign='center'>
-                  <Image src={song.cover} />
+                  <Image
+                  width={'130px'} height="130px"
+                    src={`http://127.0.0.1:8887/${song.cover
+                      .split(`SongCovers`)[1]
+                      .substring(1)}`}
+                  />
                 </Td>
                 <Td textAlign='center'>{song.name}</Td>
                 <Td textAlign='center'>{song.dateOfRelease}</Td>

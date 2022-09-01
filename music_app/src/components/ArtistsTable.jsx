@@ -1,5 +1,6 @@
 import {
   Box,
+  Heading,
   Table,
   TableContainer,
   Tbody,
@@ -22,6 +23,9 @@ const ArtistsDisplayTable = () => {
 
   return (
     <Box margin={"3rem auto"} width='90%'>
+      <Heading textAlign={"center"} fontSize={"2xl"} mb={7}>
+        Top 10 Artist
+      </Heading>
       <TableContainer>
         <Table>
           <Thead>
