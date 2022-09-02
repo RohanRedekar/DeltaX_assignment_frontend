@@ -36,17 +36,15 @@ const ArtistsDisplayTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {artists?.map(({ _id, name, dob, songs }) => (
+            {artists?.map(({ _id, name, dob, songsArr }) => (
               <Tr key={_id}>
                 <Td textAlign='center'>{name}</Td>
                 <Td textAlign='center'>{dob}</Td>
                 <Td textAlign='center'>
-                  {songs.map((song, i) =>
-                    songs.length === 0
-                      ? "No songs yet"
-                      : songs.length - 1 === i
-                      ? song.name
-                      : `${song.name}, `
+                  {!songsArr.length ? (
+                    <p style={{ opacity: "50%" }}>No songs yet</p>
+                  ) : (
+                    songsArr.map((song, i) => song.name)
                   )}
                 </Td>
               </Tr>
