@@ -31,6 +31,18 @@ const SongsDisplayTable = () => {
     setRating(newRating);
   };
 
+  useEffect(() => {
+    if (!id || !rating) return;
+    axios({
+      method: "PATCH",
+      url: "http://localhost:6001/songs/addrating",
+      data: {
+        id,
+        rating,
+      },
+    });
+  }, [rating]);
+
   return (
     <Box margin={"3rem auto"} width='90%'>
       <TableContainer>
@@ -49,7 +61,8 @@ const SongsDisplayTable = () => {
               <Tr key={song._id}>
                 <Td textAlign='center'>
                   <Image
-                  width={'130px'} height="130px"
+                    width={"130px"}
+                    height='130px'
                     src={`http://127.0.0.1:8887/${song.cover
                       .split(`SongCovers`)[1]
                       .substring(1)}`}
@@ -64,13 +77,15 @@ const SongsDisplayTable = () => {
                       : `${artist.name}, `
                   )}
                 </Td>
-                <Td textAlign='center' onClick={() => setId(song._id)}>
-                  <ReactStars
-                    count={5}
-                    onChange={ratingChanged}
-                    size={24}
-                    activeColor='#ffd700'
-                  />
+                <Td textAlign='center'>
+                  <Box onClick={() => setId(song._id)}>
+                    <ReactStars
+                      count={5}
+                      onChange={ratingChanged}
+                      size={24}
+                      activeColor='#ffd700'
+                    />
+                  </Box>
                 </Td>
               </Tr>
             ))}
