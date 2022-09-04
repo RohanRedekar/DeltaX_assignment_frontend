@@ -44,7 +44,9 @@ const ArtistsDisplayTable = () => {
                   {!songsArr.length ? (
                     <p style={{ opacity: "50%" }}>No songs yet</p>
                   ) : (
-                    songsArr.map((song, i) => song.name)
+                    songsArr.map((song, i) =>
+                      songsArr.length - 1 == i ? song.name : `${song.name}, `
+                    )
                   )}
                 </Td>
               </Tr>
